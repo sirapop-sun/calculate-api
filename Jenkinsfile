@@ -3,18 +3,21 @@ pipeline {
   stages {
     stage('Build') {
       steps {
-        withMaven(maven: 'MAVEN 3', jdk: 'JDK 8', mavenLocalRepo: '.repository') {
-          bat "mvn clean test"
-        }
+        mvnExecute("mvn clean test")
       }
     }
 
     stage('Install') {
       steps {
-        withMaven(maven: 'MAVEN 3', jdk: 'JDK 8', mavenLocalRepo: '.repository') {
-          bat "mvn clean install"
-        }
+        mvnExecute("mvn clean install")
       }
     }
   }
+}
+
+def mvnExecute(mvnCommand) {
+  withMaven(maven: 'MAVEN 3', jdk: 'JDK 8', mavenLocalRepo: '.repository') {
+    bat "${mvnCommand}"
+  }
+}
 }
