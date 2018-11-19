@@ -20,4 +20,3 @@ def mvnExecute(mvnCommand) {
     bat "${mvnCommand}"
   }
 }
-}
